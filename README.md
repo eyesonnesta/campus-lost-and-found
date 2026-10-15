@@ -6,7 +6,7 @@ PataTena is a secure, responsive campus lost-and-found application for reporting
 
 ## Status
 
-Version 1 is under active development. The repository currently contains the verified React and Supabase application foundation; production workflows and database migrations will be added incrementally against the approved specification.
+Version 1 is under active development. The repository contains the React and Supabase application foundation and the first reporting and security migration. Connected reporting workflows and later migrations are still being developed against the approved specification.
 
 ## Technology
 
@@ -27,7 +27,7 @@ Requirements:
 ```bash
 git clone https://github.com/eyesonnesta/campus-lost-and-found.git
 cd campus-lost-and-found
-npm install
+npm ci
 copy .env.example .env.local
 npm run dev
 ```
@@ -60,10 +60,9 @@ src/
   lib/              Supabase client and shared utilities
   test/             Test environment setup
 e2e/                Browser-level workflow tests
-.github/workflows/  Continuous integration
 ```
 
-Database changes will live in versioned Supabase migrations. Client code must use sanitized views and Row-Level Security policies; service-role credentials must never be shipped to the browser.
+Database changes live in versioned Supabase migrations; see `supabase/README.md` for the current scope and setup. Client code must use sanitized views and Row-Level Security policies; service-role credentials must never be shipped to the browser.
 
 ## Security and privacy
 
