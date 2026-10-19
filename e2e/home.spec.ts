@@ -8,3 +8,12 @@ test('visitor can understand the product and see the primary actions', async ({ 
   await expect(page.getByRole('button', { name: /report an item/i })).toBeVisible()
   await expect(page.getByText('Private evidence stays private.')).toBeVisible()
 })
+
+test('visitor can open and close the account panel', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Sign in' }).click()
+
+  await expect(page.getByRole('dialog')).toBeVisible()
+  await page.getByRole('button', { name: 'Close account panel' }).click()
+  await expect(page.getByRole('dialog')).toHaveCount(0)
+})

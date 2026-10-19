@@ -1,5 +1,6 @@
 import { ArrowRight, CheckCircle2, MapPin, Search, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { AccountAccess } from '@/components/AccountAccess'
 
 const steps = [
   {
@@ -41,7 +42,7 @@ export default function App() {
           </span>
         </a>
         <nav aria-label="Primary navigation" className="flex items-center gap-1 sm:gap-3">
-          <Button className="hidden sm:inline-flex" variant="ghost">Sign in</Button>
+          <AccountAccess />
           <Button variant="secondary">Browse items</Button>
         </nav>
       </header>
