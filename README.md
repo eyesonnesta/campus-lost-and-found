@@ -38,7 +38,7 @@ Set the public Supabase project URL and anonymous key in `.env.local`. Never exp
 
 Account access requires the reporting foundation migration, Supabase email confirmation, and an active campus with approved email domains. A confirmed member can create only their own profile for a campus whose domain matches their email. The account panel shows a setup message when the public Supabase configuration is absent. No live Supabase project is included in this repository.
 
-Reporting also requires the second migration, at least one active campus location, and the seeded categories. The browser calls trusted database functions to save and publish text reports; it never writes item status directly. Image uploads are disabled until their storage and server-side validation are implemented. See [supabase/README.md](supabase/README.md) for migration and local database test steps.
+Reporting also requires the second and third migrations, at least one active campus location, and the seeded categories. The browser calls trusted database functions to save and publish text reports; it never writes item status directly. A private image bucket and read boundary are prepared, but image uploads remain disabled until trusted processing and connected Storage validation are complete. See [supabase/README.md](supabase/README.md) for migration and local database test steps.
 
 ## Quality checks
 

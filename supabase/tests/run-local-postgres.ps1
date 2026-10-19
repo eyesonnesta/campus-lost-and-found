@@ -40,8 +40,10 @@ try {
     'supabase/tests/standalone_postgres_stub.sql',
     'supabase/migrations/20261015090000_reporting_foundation.sql',
     'supabase/migrations/20261019100000_text_reporting.sql',
+    'supabase/migrations/20261019110000_item_image_storage.sql',
     'supabase/tests/reporting_foundation_smoke.sql',
-    'supabase/tests/text_reporting_smoke.sql'
+    'supabase/tests/text_reporting_smoke.sql',
+    'supabase/tests/item_image_storage_smoke.sql'
   )
   $psqlArgs = @('-X', '-q', '-v', 'ON_ERROR_STOP=1', '-h', '127.0.0.1', '-p', "$port", '-U', 'postgres', '-d', 'postgres')
   foreach ($script in $scripts) {

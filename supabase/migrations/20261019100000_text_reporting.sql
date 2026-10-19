@@ -1,6 +1,6 @@
 -- Slice 1 text reports. Browser roles may create drafts; only these trusted
--- functions can publish them. Images remain disabled until upload validation
--- and storage policies are available.
+-- functions can publish them. Images remain disabled until a trusted upload
+-- pipeline validates and links them, with connected Storage policy tests.
 
 insert into public.categories (name, slug, sort_order) values
   ('Electronics', 'electronics', 10),
