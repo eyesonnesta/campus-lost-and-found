@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { User } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase'
 
@@ -11,8 +11,9 @@ function formText(form: FormData, key: string) {
   return typeof value === 'string' ? value : ''
 }
 
-export function AccountAccess() {
-  const [open, setOpen] = useState(false)
+export function AccountAccess({ openSignal = 0 }: { openSignal?: number }) {
+  const [manualOpen, setManualOpen] = useState(false)
+  const [dismissedSignal, setDismissedSignal] = useState(0)
   const [mode, setMode] = useState<Mode>('sign-in')
   const [user, setUser] = useState<User | null>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
@@ -24,11 +25,19 @@ export function AccountAccess() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
+  const open = manualOpen || openSignal > dismissedSignal
   const userId = user?.id
   const triggerRef = useRef<HTMLButtonElement>(null)
   const firstFieldRef = useRef<HTMLInputElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
   const dialogRef = useRef<HTMLElement>(null)
+  const close = useCallback(() => {
+    setManualOpen(false)
+    setDismissedSignal(openSignal)
+    setError('')
+    setNotice('')
+    triggerRef.current?.focus()
+  }, [openSignal])
 
   useEffect(() => {
     if (!supabase) return
@@ -110,14 +119,7 @@ export function AccountAccess() {
     }
     window.addEventListener('keydown', keepFocusInside)
     return () => window.removeEventListener('keydown', keepFocusInside)
-  }, [open, userId, profile, checkingProfile, mode])
-
-  function close() {
-    setOpen(false)
-    setError('')
-    setNotice('')
-    triggerRef.current?.focus()
-  }
+  }, [open, userId, profile, checkingProfile, mode, close])
 
   function changeMode(nextMode: Mode) {
     setMode(nextMode)
@@ -189,7 +191,7 @@ export function AccountAccess() {
 
   return (
     <>
-      <button ref={triggerRef} type="button" onClick={() => { setOpen(true); setError('') }}
+      <button ref={triggerRef} type="button" onClick={() => { setManualOpen(true); setError('') }}
         className="rounded-lg px-4 py-2 text-sm font-semibold text-emerald-950 hover:bg-emerald-950/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-800">
         {profile ? 'Account' : user ? 'Finish setup' : 'Sign in'}
       </button>

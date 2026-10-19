@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { ArrowRight, CheckCircle2, MapPin, Search, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { AccountAccess } from '@/components/AccountAccess'
+import { ReportFlow } from '@/components/ReportFlow'
 
 const steps = [
   {
@@ -29,6 +31,8 @@ function BrandMark() {
 }
 
 export default function App() {
+  const [reportOpen, setReportOpen] = useState(false)
+  const [accountSignal, setAccountSignal] = useState(0)
   return (
     <div className="min-h-screen bg-stone-50 text-emerald-950">
       <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-12">
@@ -42,12 +46,18 @@ export default function App() {
           </span>
         </a>
         <nav aria-label="Primary navigation" className="flex items-center gap-1 sm:gap-3">
-          <AccountAccess />
+          <AccountAccess openSignal={accountSignal} />
           <Button variant="secondary">Browse items</Button>
         </nav>
       </header>
 
       <main id="top">
+        {reportOpen ? (
+          <ReportFlow onBack={() => setReportOpen(false)} onSignIn={() => {
+            setReportOpen(false)
+            setAccountSignal((signal) => signal + 1)
+          }} />
+        ) : <>
         <section className="relative isolate overflow-hidden px-5 pb-20 pt-12 sm:px-8 sm:pt-20 lg:px-12 lg:pb-28">
           <div aria-hidden="true" className="absolute left-1/2 top-12 -z-10 size-[34rem] -translate-x-1/2 rounded-full bg-amber-200/40 blur-3xl" />
           <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.06fr_0.94fr]">
@@ -63,7 +73,7 @@ export default function App() {
                 Report lost and found items, discover credible matches, and complete a secure, traceable handover—all in one place.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Button className="group gap-2 px-6">Report an item <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5" /></Button>
+                <Button className="group gap-2 px-6" onClick={() => setReportOpen(true)}>Report an item <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5" /></Button>
                 <Button className="px-6" variant="secondary">Search found items</Button>
               </div>
               <p className="mt-5 flex items-center gap-2 text-sm font-medium text-emerald-900/60">
@@ -122,6 +132,7 @@ export default function App() {
             </ol>
           </div>
         </section>
+        </>}
       </main>
 
       <footer className="bg-emerald-950 px-5 pb-8 pt-3 text-emerald-100/60 sm:px-8 lg:px-12">

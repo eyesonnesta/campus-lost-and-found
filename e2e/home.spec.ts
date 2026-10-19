@@ -17,3 +17,12 @@ test('visitor can open and close the account panel', async ({ page }) => {
   await page.getByRole('button', { name: 'Close account panel' }).click()
   await expect(page.getByRole('dialog')).toHaveCount(0)
 })
+
+test('report action opens the reporting screen', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Report an item' }).click()
+
+  await expect(page.getByRole('heading', { name: 'Report an item' })).toBeVisible()
+  await page.getByRole('button', { name: /Back to home/ }).click()
+  await expect(page.getByRole('heading', { name: /what went missing can find its way back/i })).toBeVisible()
+})

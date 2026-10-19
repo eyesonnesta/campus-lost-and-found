@@ -6,7 +6,7 @@ PataTena is a secure, responsive campus lost-and-found application for reporting
 
 ## Status
 
-Version 1 is under active development. The repository contains the React and Supabase application foundation, the first reporting and security migration, and an account panel for sign-in, email confirmation, and campus profile creation. Connected reporting workflows and later migrations are still being developed against the approved specification.
+Version 1 is under active development. The repository contains the React and Supabase application foundation, campus account onboarding, and a text-only lost/found reporting flow with private drafts, draft editing, trusted publication, and owner-controlled archival. Image uploads, claims, matching, messaging, moderation, and notifications are later work.
 
 ## Technology
 
@@ -37,6 +37,8 @@ On macOS or Linux, use `cp .env.example .env.local` instead of `copy`.
 Set the public Supabase project URL and anonymous key in `.env.local`. Never expose a service-role key in browser environment variables.
 
 Account access requires the reporting foundation migration, Supabase email confirmation, and an active campus with approved email domains. A confirmed member can create only their own profile for a campus whose domain matches their email. The account panel shows a setup message when the public Supabase configuration is absent. No live Supabase project is included in this repository.
+
+Reporting also requires the second migration, at least one active campus location, and the seeded categories. The browser calls trusted database functions to save and publish text reports; it never writes item status directly. Image uploads are disabled until their storage and server-side validation are implemented. See [supabase/README.md](supabase/README.md) for migration and local database test steps.
 
 ## Quality checks
 

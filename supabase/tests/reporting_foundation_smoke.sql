@@ -2,7 +2,7 @@
 insert into public.campuses (id, name, slug, email_domains)
 values ('11111111-1111-4111-8111-111111111111', 'Example Campus', 'example-campus', array['example.edu']);
 insert into public.categories (id, name, slug)
-values ('22222222-2222-4222-8222-222222222222', 'Keys', 'keys');
+values ('22222222-2222-4222-8222-222222222222', 'Test keys', 'test-keys');
 insert into auth.users (id, email, email_confirmed_at)
 values
   ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', 'owner@example.edu', now()),
